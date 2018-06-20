@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SimulationExam.Classes.Entity;
 
 namespace SimulationExam.Web.Controllers
 {
@@ -10,7 +11,9 @@ namespace SimulationExam.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            User user = new User();
+            user.Email = "example@gmail.com";
+            return View(user);
         }
 
         public ActionResult About()
