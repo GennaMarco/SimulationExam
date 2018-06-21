@@ -1,22 +1,17 @@
-﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+﻿<ul class="nav navbar-nav navbar-right">
+    @if (Session["ScreenName"] == null)
     {
-    @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Salve " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Disconnetti</a></li>
-    </ul>
+        <li>@Html.ActionLink("Login", "Login", "Security")</li>
+        <li>@Html.ActionLink("Signup", "Login", "Security")</li>
     }
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Registrazione", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Accedi", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-}
+    else
+    {
+        <li class="dropdown">
+            <a style="color: white;" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Session["ScreenName"].ToString() <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li style="color: white;">@Html.ActionLink("Logout", "Logout", "Security")</li>
+            </ul>
+        </li>
+    }
+    <li><a href="https://github.com/GennaMarco/Progetti_ASP.NET/" target="_blank"><i class="fa fa-github fa-2x"></i>Github</a></li>
+</ul>
