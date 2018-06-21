@@ -109,8 +109,10 @@ hr{
     box-sizing: border-box;
 }
 
+.form-signin #inputScreenName,
 .form-signin #inputEmail,
-.form-signin #inputPassword {
+.form-signin #inputPassword,
+.form-signin #inputConfirmPassword {
     direction: ltr;
     height: 44px;
     font-size: 16px;

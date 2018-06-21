@@ -1,0 +1,28 @@
+﻿@model SimulationExam.Classes.Entity.User
+
+@{
+    ViewBag.Title = "Signup";
+}
+
+@Styles.Render("~/Content/Login.css")
+
+@using (Html.BeginForm("Signup", "Security", FormMethod.Post, new { @class = "form-signin" }))
+{
+    <div class="container">
+        <div class="card card-container">
+            <h2 class='login_title text-center'>Signup</h2>
+            <hr>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <span id="reauth-email" class="reauth-email"></span>
+            <p class="input_title">ScreenName</p>
+            @Html.EditorFor(User => User.ScreenName, new { htmlAttributes = new { @class = "login_box center-block", id = "inputScreenName", placeholder = "ScreenName" } })
+            <p class="input_title">Email</p>
+            @Html.EditorFor(User => User.Email, new { htmlAttributes = new { @class = "login_box center-block", id = "inputEmail", placeholder = "example@gmail.com" } })
+            <p class="input_title">Password</p>
+            @Html.EditorFor(User => User.Password, new { htmlAttributes = new { @class = "login_box center-block", @type = "password", id = "inputPassword", placeholder = "******" } })
+            <p class="input_title">Confirm Password</p>
+            <input type="password" name="ConfirmPassword" class="login_box center-block" id="inputConfirmPassword" placeholder="******" \>
+            <input class="btn btn-lg btn-primary center-block" type="submit" value="Signup"\>
+        </div>
+    </div>
+}

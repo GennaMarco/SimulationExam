@@ -9,7 +9,7 @@ namespace SimulationExam.Classes.Manager
 {
     public class UserManager
     {
-        public static string GetSHA512(string String)
+        public string GetSHA512(string String)
         {
             byte[] hashValue;
             byte[] message = System.Text.Encoding.UTF8.GetBytes(String);
