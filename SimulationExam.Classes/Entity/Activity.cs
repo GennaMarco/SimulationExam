@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace SimulationExam.Classes.Entity
 {
-    public class User
+    public class Activity
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public Role Role { get; set; }
+        public DateTime Date { get; set; }
+        public Event Event { get; set; }
     }
 }

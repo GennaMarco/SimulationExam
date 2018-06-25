@@ -18,7 +18,7 @@ namespace SimulationExam.Web.Controllers
                 User usr = null;
                 if (usr != null)
                 {
-                    Session["ScreenName"] = usr.ScreenName.ToString();
+                    Session["ScreenName"] = usr.Name.ToString();
                     return RedirectToAction("Index", "Home", null);
                 }
                 else
@@ -32,7 +32,7 @@ namespace SimulationExam.Web.Controllers
         
         public ActionResult Signup(User user)
         {
-            if (user.ScreenName != null && user.Email != null && user.Password != null)
+            if (user.Name != null && user.Email != null && user.Password != null)
             {
                 string ConfirmPassword = this.Request["ConfirmPassword"];
 
