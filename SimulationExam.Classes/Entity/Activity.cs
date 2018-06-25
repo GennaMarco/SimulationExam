@@ -8,9 +8,8 @@ namespace SimulationExam.Classes.Entity
 {
     public class Activity
     {
-        public int Id { get; set; }
+        public int Id { get; }
         public string Name { get; set; }
-        public DateTime Date { get; set; }
-        public Event Event_id { get; set; }
+        public Event EventId { get; set; }
     }
 }

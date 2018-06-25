@@ -4,20 +4,29 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Date" Type="DateTime" Precision="3" />
-    <Property Name="Event_id" Type="Int32" />
+    <Property Name="EventId" Type="Int32" />
     <NavigationProperty Name="Event" Relationship="Self.FK_Activity_Event" FromRole="Activity" ToRole="Event" />
+    <NavigationProperty Name="ActivityDate" Relationship="Self.FK_ActivityDate_Activity" FromRole="Activity" ToRole="ActivityDate" />
     <NavigationProperty Name="UserActivity" Relationship="Self.FK_UserActivity_Activity" FromRole="Activity" ToRole="UserActivity" />
+  </EntityType>
+  <EntityType Name="ActivityDate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="ActivityId" Type="Int32" />
+    <NavigationProperty Name="Activity" Relationship="Self.FK_ActivityDate_Activity" FromRole="ActivityDate" ToRole="Activity" />
   </EntityType>
   <EntityType Name="Event">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="User_id" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
     <NavigationProperty Name="Activity" Relationship="Self.FK_Activity_Event" FromRole="Event" ToRole="Activity" />
     <NavigationProperty Name="User" Relationship="Self.FK_Event_User" FromRole="Event" ToRole="User" />
   </EntityType>
@@ -25,7 +34,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
   </EntityType>
@@ -43,11 +52,11 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Role_id" Type="Int32" />
+    <Property Name="RoleId" Type="Int32" />
     <NavigationProperty Name="Event" Relationship="Self.FK_Event_User" FromRole="User" ToRole="Event" />
     <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
     <NavigationProperty Name="UserActivity" Relationship="Self.FK_UserActivity_User" FromRole="User" ToRole="UserActivity" />
@@ -56,10 +65,10 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="User_id" Type="Int32" />
-    <Property Name="Activity_id" Type="Int32" />
+    <Property Name="ActivityId" Type="Int32" />
     <Property Name="IsPartecipant" Type="Byte" />
     <NavigationProperty Name="Activity" Relationship="Self.FK_UserActivity_Activity" FromRole="UserActivity" ToRole="Activity" />
     <NavigationProperty Name="User" Relationship="Self.FK_UserActivity_User" FromRole="UserActivity" ToRole="User" />
@@ -72,7 +81,19 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Activity">
-        <PropertyRef Name="Event_id" />
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActivityDate_Activity">
+    <End Role="Activity" Type="Self.Activity" Multiplicity="0..1" />
+    <End Role="ActivityDate" Type="Self.ActivityDate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActivityDate">
+        <PropertyRef Name="ActivityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -84,7 +105,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="UserActivity">
-        <PropertyRef Name="Activity_id" />
+        <PropertyRef Name="ActivityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -96,7 +117,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Event">
-        <PropertyRef Name="User_id" />
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -108,7 +129,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="User">
-        <PropertyRef Name="Role_id" />
+        <PropertyRef Name="RoleId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -126,6 +147,7 @@
   </Association>
   <EntityContainer Name="SimulationExamEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Activity" EntityType="Self.Activity" />
+    <EntitySet Name="ActivityDate" EntityType="Self.ActivityDate" />
     <EntitySet Name="Event" EntityType="Self.Event" />
     <EntitySet Name="Role" EntityType="Self.Role" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -134,6 +156,10 @@
     <AssociationSet Name="FK_Activity_Event" Association="Self.FK_Activity_Event">
       <End Role="Event" EntitySet="Event" />
       <End Role="Activity" EntitySet="Activity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActivityDate_Activity" Association="Self.FK_ActivityDate_Activity">
+      <End Role="Activity" EntitySet="Activity" />
+      <End Role="ActivityDate" EntitySet="ActivityDate" />
     </AssociationSet>
     <AssociationSet Name="FK_UserActivity_Activity" Association="Self.FK_UserActivity_Activity">
       <End Role="Activity" EntitySet="Activity" />

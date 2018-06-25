@@ -26,6 +26,7 @@ namespace SimulationExam.Web.Models
         }
     
         public virtual DbSet<Activity> Activity { get; set; }
+        public virtual DbSet<ActivityDate> ActivityDate { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

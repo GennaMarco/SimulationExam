@@ -12,15 +12,12 @@ namespace SimulationExam.Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserActivity
+    public partial class ActivityDate
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> User_id { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
         public Nullable<int> ActivityId { get; set; }
-        public Nullable<byte> IsPartecipant { get; set; }
     
         public virtual Activity Activity { get; set; }
-        public virtual User User { get; set; }
     }
 }

@@ -9,24 +9,31 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="EventId" Type="int" />
+        </EntityType>
+        <EntityType Name="ActivityDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="datetime" />
-          <Property Name="Event_id" Type="int" />
+          <Property Name="ActivityId" Type="int" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
-          <Property Name="User_id" Type="int" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -43,20 +50,20 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
           <Property Name="Email" Type="varchar" MaxLength="255" />
           <Property Name="Password" Type="varchar" MaxLength="255" />
-          <Property Name="Role_id" Type="int" />
+          <Property Name="RoleId" Type="int" />
         </EntityType>
         <EntityType Name="UserActivity">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
           <Property Name="User_id" Type="int" />
-          <Property Name="Activity_id" Type="int" />
+          <Property Name="ActivityId" Type="int" />
           <Property Name="IsPartecipant" Type="tinyint" />
         </EntityType>
         <Association Name="FK_Activity_Event">
@@ -67,7 +74,19 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Activity">
-              <PropertyRef Name="Event_id" />
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDate_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="0..1" />
+          <End Role="ActivityDate" Type="Self.ActivityDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDate">
+              <PropertyRef Name="ActivityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -79,7 +98,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Event">
-              <PropertyRef Name="User_id" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -91,7 +110,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="User">
-              <PropertyRef Name="Role_id" />
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -103,7 +122,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UserActivity">
-              <PropertyRef Name="Activity_id" />
+              <PropertyRef Name="ActivityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -121,6 +140,7 @@
         </Association>
         <EntityContainer Name="SimulationExamModelStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActivityDate" EntityType="Self.ActivityDate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -129,6 +149,10 @@
           <AssociationSet Name="FK_Activity_Event" Association="Self.FK_Activity_Event">
             <End Role="Event" EntitySet="Event" />
             <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDate_Activity" Association="Self.FK_ActivityDate_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="ActivityDate" EntitySet="ActivityDate" />
           </AssociationSet>
           <AssociationSet Name="FK_Event_User" Association="Self.FK_Event_User">
             <End Role="User" EntitySet="User" />
@@ -156,20 +180,29 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="Event_id" Type="Int32" />
+          <Property Name="EventId" Type="Int32" />
           <NavigationProperty Name="Event" Relationship="Self.FK_Activity_Event" FromRole="Activity" ToRole="Event" />
+          <NavigationProperty Name="ActivityDate" Relationship="Self.FK_ActivityDate_Activity" FromRole="Activity" ToRole="ActivityDate" />
           <NavigationProperty Name="UserActivity" Relationship="Self.FK_UserActivity_Activity" FromRole="Activity" ToRole="UserActivity" />
+        </EntityType>
+        <EntityType Name="ActivityDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="ActivityId" Type="Int32" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_ActivityDate_Activity" FromRole="ActivityDate" ToRole="Activity" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="User_id" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
           <NavigationProperty Name="Activity" Relationship="Self.FK_Activity_Event" FromRole="Event" ToRole="Activity" />
           <NavigationProperty Name="User" Relationship="Self.FK_Event_User" FromRole="Event" ToRole="User" />
         </EntityType>
@@ -177,7 +210,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
@@ -195,11 +228,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Role_id" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
           <NavigationProperty Name="Event" Relationship="Self.FK_Event_User" FromRole="User" ToRole="Event" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
           <NavigationProperty Name="UserActivity" Relationship="Self.FK_UserActivity_User" FromRole="User" ToRole="UserActivity" />
@@ -208,10 +241,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="User_id" Type="Int32" />
-          <Property Name="Activity_id" Type="Int32" />
+          <Property Name="ActivityId" Type="Int32" />
           <Property Name="IsPartecipant" Type="Byte" />
           <NavigationProperty Name="Activity" Relationship="Self.FK_UserActivity_Activity" FromRole="UserActivity" ToRole="Activity" />
           <NavigationProperty Name="User" Relationship="Self.FK_UserActivity_User" FromRole="UserActivity" ToRole="User" />
@@ -224,7 +257,19 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Activity">
-              <PropertyRef Name="Event_id" />
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDate_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="0..1" />
+          <End Role="ActivityDate" Type="Self.ActivityDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDate">
+              <PropertyRef Name="ActivityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -236,7 +281,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UserActivity">
-              <PropertyRef Name="Activity_id" />
+              <PropertyRef Name="ActivityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -248,7 +293,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Event">
-              <PropertyRef Name="User_id" />
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -260,7 +305,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="User">
-              <PropertyRef Name="Role_id" />
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -278,6 +323,7 @@
         </Association>
         <EntityContainer Name="SimulationExamEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Activity" EntityType="Self.Activity" />
+          <EntitySet Name="ActivityDate" EntityType="Self.ActivityDate" />
           <EntitySet Name="Event" EntityType="Self.Event" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -286,6 +332,10 @@
           <AssociationSet Name="FK_Activity_Event" Association="Self.FK_Activity_Event">
             <End Role="Event" EntitySet="Event" />
             <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDate_Activity" Association="Self.FK_ActivityDate_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="ActivityDate" EntitySet="ActivityDate" />
           </AssociationSet>
           <AssociationSet Name="FK_UserActivity_Activity" Association="Self.FK_UserActivity_Activity">
             <End Role="Activity" EntitySet="Activity" />
@@ -315,8 +365,16 @@
               <MappingFragment StoreEntitySet="Activity">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityDate">
+            <EntityTypeMapping TypeName="SimulationExamModel.ActivityDate">
+              <MappingFragment StoreEntitySet="ActivityDate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Event_id" ColumnName="Event_id" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -325,7 +383,7 @@
               <MappingFragment StoreEntitySet="Event">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -355,7 +413,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -365,7 +423,7 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="User_id" ColumnName="User_id" />
-                <ScalarProperty Name="Activity_id" ColumnName="Activity_id" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
                 <ScalarProperty Name="IsPartecipant" ColumnName="IsPartecipant" />
               </MappingFragment>
             </EntityTypeMapping>

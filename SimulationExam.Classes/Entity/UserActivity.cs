@@ -8,9 +8,9 @@ namespace SimulationExam.Classes.Entity
 {
     class UserActivity
     {
-        public int Id { get; set; }
-        public User User_id { get; set; }
-        public Activity Activity_id { get; set; }
+        public int Id { get; }
+        public User UserId { get; set; }
+        public Activity ActivityId { get; set; }
         public bool IsPartecipant { get; set; }
     }
 }

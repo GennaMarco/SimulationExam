@@ -4,24 +4,31 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" />
+    <Property Name="EventId" Type="int" />
+  </EntityType>
+  <EntityType Name="ActivityDate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="datetime" />
-    <Property Name="Event_id" Type="int" />
+    <Property Name="ActivityId" Type="int" />
   </EntityType>
   <EntityType Name="Event">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" />
-    <Property Name="User_id" Type="int" />
+    <Property Name="UserId" Type="int" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="sysdiagrams">
@@ -38,20 +45,20 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" />
     <Property Name="Email" Type="varchar" MaxLength="255" />
     <Property Name="Password" Type="varchar" MaxLength="255" />
-    <Property Name="Role_id" Type="int" />
+    <Property Name="RoleId" Type="int" />
   </EntityType>
   <EntityType Name="UserActivity">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" />
     <Property Name="User_id" Type="int" />
-    <Property Name="Activity_id" Type="int" />
+    <Property Name="ActivityId" Type="int" />
     <Property Name="IsPartecipant" Type="tinyint" />
   </EntityType>
   <Association Name="FK_Activity_Event">
@@ -62,7 +69,19 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Activity">
-        <PropertyRef Name="Event_id" />
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActivityDate_Activity">
+    <End Role="Activity" Type="Self.Activity" Multiplicity="0..1" />
+    <End Role="ActivityDate" Type="Self.ActivityDate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActivityDate">
+        <PropertyRef Name="ActivityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -74,7 +93,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Event">
-        <PropertyRef Name="User_id" />
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -86,7 +105,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="User">
-        <PropertyRef Name="Role_id" />
+        <PropertyRef Name="RoleId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -98,7 +117,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="UserActivity">
-        <PropertyRef Name="Activity_id" />
+        <PropertyRef Name="ActivityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -116,6 +135,7 @@
   </Association>
   <EntityContainer Name="SimulationExamModelStoreContainer">
     <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActivityDate" EntityType="Self.ActivityDate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -124,6 +144,10 @@
     <AssociationSet Name="FK_Activity_Event" Association="Self.FK_Activity_Event">
       <End Role="Event" EntitySet="Event" />
       <End Role="Activity" EntitySet="Activity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActivityDate_Activity" Association="Self.FK_ActivityDate_Activity">
+      <End Role="Activity" EntitySet="Activity" />
+      <End Role="ActivityDate" EntitySet="ActivityDate" />
     </AssociationSet>
     <AssociationSet Name="FK_Event_User" Association="Self.FK_Event_User">
       <End Role="User" EntitySet="User" />

@@ -8,7 +8,7 @@ namespace SimulationExam.Classes.Entity
 {
     public class Role
     {
-        public int Id { get; set; }
+        public int Id { get; }
         public string Name { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace SimulationExam.Web.Models
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<int> User_id { get; set; }
+        public Nullable<int> UserId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Activity> Activity { get; set; }

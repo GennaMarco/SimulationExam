@@ -6,8 +6,16 @@
         <MappingFragment StoreEntitySet="Activity">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActivityDate">
+      <EntityTypeMapping TypeName="SimulationExamModel.ActivityDate">
+        <MappingFragment StoreEntitySet="ActivityDate">
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="Event_id" ColumnName="Event_id" />
+          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -16,7 +24,7 @@
         <MappingFragment StoreEntitySet="Event">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="User_id" ColumnName="User_id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -46,7 +54,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Role_id" ColumnName="Role_id" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -56,7 +64,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="User_id" ColumnName="User_id" />
-          <ScalarProperty Name="Activity_id" ColumnName="Activity_id" />
+          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
           <ScalarProperty Name="IsPartecipant" ColumnName="IsPartecipant" />
         </MappingFragment>
       </EntityTypeMapping>
