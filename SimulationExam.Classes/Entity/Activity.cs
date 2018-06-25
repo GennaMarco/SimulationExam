@@ -11,6 +11,6 @@ namespace SimulationExam.Classes.Entity
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Date { get; set; }
-        public Event Event { get; set; }
+        public Event Event_id { get; set; }
     }
 }

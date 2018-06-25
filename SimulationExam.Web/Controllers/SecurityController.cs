@@ -1,4 +1,6 @@
-﻿using SimulationExam.Classes.Entity;
+﻿//using SimulationExam.Classes.Entity;
+using SimulationExam.Classes.Manager;
+using SimulationExam.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +17,14 @@ namespace SimulationExam.Web.Controllers
             {
                 //ChristmasApplicationMongoDB db = new ChristmasApplicationMongoDB();
                 //var usr = db.GetUserByEmailAndPassword(user);
-                User usr = null;
-                if (usr != null)
+
+                SimulationExamEntities db = new SimulationExamEntities();
+                User userDb = db.User.SingleOrDefault(usr => usr.Email == user.Email && usr.Password == user.Password);
+                UserManager um = new UserManager();
+                
+                if (userDb != null)
                 {
-                    Session["ScreenName"] = usr.Name.ToString();
+                    Session["ScreenName"] = userDb.Name.ToString();
                     return RedirectToAction("Index", "Home", null);
                 }
                 else
@@ -29,7 +35,13 @@ namespace SimulationExam.Web.Controllers
             }
             return View();
         }
-        
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login");
+        }
+
         public ActionResult Signup(User user)
         {
             if (user.Name != null && user.Email != null && user.Password != null)

@@ -15,9 +15,9 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <span id="reauth-email" class="reauth-email"></span>
             <p class="input_title">Email</p>
-            @Html.EditorFor(User => User.Email, new { htmlAttributes = new { @class = "login_box center-block", id = "inputEmail", placeholder = "example@gmail.com" } })
+            @Html.EditorFor(User => User.Email, new { htmlAttributes = new { @class = "login_box center-block", id = "inputEmail" } })
             <p class="input_title">Password</p>
-            @Html.EditorFor(User => User.Password, new { htmlAttributes = new { @class = "login_box center-block", @type = "password", id = "inputPassword", placeholder = "******" } })
+            @Html.EditorFor(User => User.Password, new { htmlAttributes = new { @class = "login_box center-block", @type = "password", id = "inputPassword" } })
             <div id="remember" class="checkbox">
                 <label>
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SimulationExam.Classes.Entity;
+using SimulationExam.Web.Models;
 
 namespace SimulationExam.Web.Controllers
 {
@@ -11,9 +12,10 @@ namespace SimulationExam.Web.Controllers
     {
         public ActionResult Index()
         {
-            User user = new User();
-            user.Email = "example@gmail.com";
-            return View(user);
+            SimulationExamEntities db = new SimulationExamEntities();
+            Models.User user2 = db.User.SingleOrDefault(user => user.Id == 1);
+
+            return View(user2);
         }
 
         public ActionResult About()

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d126980d3f9447b4b73fc0dd28e83d72" Name="Diagram1">
+        <EntityTypeShape EntityType="SimulationExamModel.Activity" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimulationExamModel.Event" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimulationExamModel.Role" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimulationExamModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimulationExamModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimulationExamModel.UserActivity" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="SimulationExamModel.FK_Activity_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="SimulationExamModel.FK_UserActivity_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="SimulationExamModel.FK_Event_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SimulationExamModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="SimulationExamModel.FK_UserActivity_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

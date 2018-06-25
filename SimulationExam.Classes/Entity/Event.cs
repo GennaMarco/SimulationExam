@@ -10,6 +10,6 @@ namespace SimulationExam.Classes.Entity
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public User UserManager { get; set; }
+        public User User_id { get; set; }
     }
 }
