@@ -1,4 +1,5 @@
 ﻿using SimulationExam.Web.Models;
+using SimulationExam.Web.Models.Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace SimulationExam.Web.Controllers
         {
             if (user.Email != null && user.Password != null)
             {
-                SimulationExamEntities db = new SimulationExamEntities();
-                User userDb = db.User.SingleOrDefault(usr => usr.Email == user.Email && usr.Password == user.Password);
+                UserManager um = new UserManager();
+                User userDb = um.GetUserByEmailAndPassword(user.Email, user.Password);
                 
                 if (userDb != null)
                 {

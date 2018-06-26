@@ -8,27 +8,25 @@ using System.Web.Mvc;
 
 namespace SimulationExam.Web.Controllers
 {
-    public class ActivityController : Controller
+    public class ActivityController : BaseController
     {
-        private List<string> allowedRoles;
-
+        private List<string> rolesAllowedToRoute;
         public ActivityController()
         {
-            RoleManager rm = new RoleManager();
-            allowedRoles = new List<string>();
-            allowedRoles.Add(rm.GetRoleByName("Organizzatore").Name);
+            rolesAllowedToRoute = new List<string>();
         }
         // GET: Activity
         public ActionResult Index()
         {
-            if (this.allowedRoles.Contains(Session["Role"]))
+            rolesAllowedToRoute.Add("Partecipante");
+            RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles(rolesAllowedToRoute);
+            if (redirectToHome != null)
             {
-                ActivityManager am = new ActivityManager();
-                ICollection<Activity> activities = am.GetActivities();
-                return View(activities);
+                return redirectToHome;
             }
-            TempData["errorMessage"] = "Non hai i permessi per visualizzare questa pagina";
-            return RedirectToAction("Index", "Home", null);
+            ActivityManager am = new ActivityManager();
+            ICollection<Activity> activities = am.GetActivities();
+            return View(activities);
         }
     }
 }

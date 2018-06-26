@@ -12,10 +12,7 @@ namespace SimulationExam.Web.Controllers
     {
         public ActionResult Index()
         {
-            SimulationExamEntities db = new SimulationExamEntities();
-            Models.User user2 = db.User.SingleOrDefault(user => user.Id == 1);
-
-            return View(user2);
+            return View();
         }
 
         public ActionResult About()

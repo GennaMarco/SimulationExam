@@ -196,23 +196,25 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Activity.cs">
-      <DependentUpon>ModelDatabaseSqlServer.tt</DependentUpon>
+      <DependentUpon>ModelDatabaseSqlServerPCITS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ActivityDate.cs">
-      <DependentUpon>ModelDatabaseSqlServer.tt</DependentUpon>
+      <DependentUpon>ModelDatabaseSqlServerPCITS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Database\DatabaseSqlServer.cs" />
     <Compile Include="Models\Event.cs">
-      <DependentUpon>ModelDatabaseSqlServer.tt</DependentUpon>
+      <DependentUpon>ModelDatabaseSqlServerPCITS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Manager\ActivityManager.cs" />
     <Compile Include="Models\Manager\RoleManager.cs" />
+    <Compile Include="Models\Manager\UserManager.cs" />
     <Compile Include="Models\ModelDatabaseSqlServer.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -228,17 +230,32 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDatabaseSqlServer.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelDatabaseSqlServerPCITS.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDatabaseSqlServerPCITS.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelDatabaseSqlServerPCITS.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDatabaseSqlServerPCITS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelDatabaseSqlServerPCITS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDatabaseSqlServerPCITS.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Role.cs">
-      <DependentUpon>ModelDatabaseSqlServer.tt</DependentUpon>
+      <DependentUpon>ModelDatabaseSqlServerPCITS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>ModelDatabaseSqlServer.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>ModelDatabaseSqlServer.tt</DependentUpon>
+      <DependentUpon>ModelDatabaseSqlServerPCITS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserActivity.cs">
-      <DependentUpon>ModelDatabaseSqlServer.tt</DependentUpon>
+      <DependentUpon>ModelDatabaseSqlServerPCITS.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -267,6 +284,13 @@
     <Content Include="Models\ModelDatabaseSqlServer.edmx.diagram">
       <DependentUpon>ModelDatabaseSqlServer.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\ModelDatabaseSqlServerPCITS.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelDatabaseSqlServerPCITS.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelDatabaseSqlServerPCITS.edmx.diagram">
+      <DependentUpon>ModelDatabaseSqlServerPCITS.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\ModelDatabaseSqlServer.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -277,6 +301,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelDatabaseSqlServer.edmx</DependentUpon>
       <LastGenOutput>ModelDatabaseSqlServer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelDatabaseSqlServerPCITS.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelDatabaseSqlServerPCITS.edmx</DependentUpon>
+      <LastGenOutput>ModelDatabaseSqlServerPCITS.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelDatabaseSqlServerPCITS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelDatabaseSqlServerPCITS.edmx</DependentUpon>
+      <LastGenOutput>ModelDatabaseSqlServerPCITS.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
