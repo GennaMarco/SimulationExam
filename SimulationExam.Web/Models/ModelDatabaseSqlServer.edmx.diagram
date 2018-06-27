@@ -11,13 +11,14 @@
         <EntityTypeShape EntityType="SimulationExamModel.Role" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SimulationExamModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SimulationExamModel.User" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SimulationExamModel.UserActivity" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimulationExamModel.UserActivity" Width="1.5" PointX="3.125" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="SimulationExamModel.FK_Activity_Event" ManuallyRouted="false" />
         <AssociationConnector Association="SimulationExamModel.FK_ActivityDate_Activity" ManuallyRouted="false" />
         <AssociationConnector Association="SimulationExamModel.FK_UserActivity_Activity" ManuallyRouted="false" />
         <AssociationConnector Association="SimulationExamModel.FK_Event_User" ManuallyRouted="false" />
         <AssociationConnector Association="SimulationExamModel.FK_User_Role" ManuallyRouted="false" />
-        <AssociationConnector Association="SimulationExamModel.FK_UserActivity_User" ManuallyRouted="false" />
+        <AssociationConnector Association="SimulationExamModel.FK_UserActivity_User" ManuallyRouted="false" >
+        </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

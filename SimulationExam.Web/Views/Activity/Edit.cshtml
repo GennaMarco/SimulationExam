@@ -1,0 +1,47 @@
+﻿@using SimulationExam.Web.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center">Activities</h2>
+
+@model Activity
+
+<div>
+    <hr />
+    @using (Html.BeginForm("Save", "Activity", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label for="activityId">Id</label>
+            <input type="text" class="form-control" id="activityId" name="activityId" value="@Model.Id">
+        </div>
+        <div class="form-group">
+            <label for="activityName">Name</label>
+            <input type="text" class="form-control" id="activityName" name="activityName" value="@Model.Name">
+        </div>
+        <hr />
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th class="text-center">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ActivityDate activityDate in Model.ActivityDate)
+                {
+                    string dateValue = String.Format("{0:d/M/yyyy}", activityDate.Date);
+                    <tr>
+                        <td class="text-center">
+                            <input type="text" class="form-control" name="listDates" value="@dateValue">
+                            <input type="hidden" class="form-control" name="listDateIds" value="@activityDate.Id">
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    }
+</div>
+
+

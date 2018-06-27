@@ -14,13 +14,13 @@
         <th>Actions</th>
     </thead>
     <tbody>
-    @foreach (var activity in Model)
+    @foreach (Activity activity in Model)
     {
         <tr>
             <td>@activity.Name</td>
             <td>
-                <a href="#" class="btn btn-primary"><i class="glyphicon glyphicon-eye-open"></i> View</a>
-                <a href="#" class="btn btn-warning"><i class="glyphicon glyphicon-wrench"></i> Edit</a>
+                @Html.ActionLink("Edit", "Edit", new { id = activity.Id }, new { @class = "btn btn-primary" })
+             <a href="#" class="btn btn-warning"><i class="glyphicon glyphicon-wrench"></i> Edit</a>
             </td>
         </tr>
     }        

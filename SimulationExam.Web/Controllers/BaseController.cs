@@ -11,6 +11,8 @@ namespace SimulationExam.Web.Controllers
     {
         protected List<string> allowedRoles;
         protected RoleManager rm;
+        protected string ROLE_MANAGER = "Organizzatore";
+        protected string ROLE_PARTECIPANT = "Partecipante";
 
         public BaseController()
         {
@@ -18,13 +20,8 @@ namespace SimulationExam.Web.Controllers
             allowedRoles = new List<string>();
         }
 
-        protected RedirectToRouteResult RouteAccessAllowedRoles(List<string> roles)
+        protected RedirectToRouteResult RouteAccessAllowedRoles()
         {
-            foreach(string role in roles)
-            {
-                this.allowedRoles.Add(rm.GetRoleByName(role).Name);
-            }
-            
             if (!this.allowedRoles.Contains(Session["Role"]))  
             {
                 TempData["errorMessage"] = "Non hai i permessi per visualizzare questa pagina";

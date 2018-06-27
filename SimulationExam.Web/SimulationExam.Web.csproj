@@ -212,6 +212,7 @@
     <Compile Include="Models\Event.cs">
       <DependentUpon>ModelDatabaseSqlServerPCITS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Manager\ActivityDateManager.cs" />
     <Compile Include="Models\Manager\ActivityManager.cs" />
     <Compile Include="Models\Manager\RoleManager.cs" />
     <Compile Include="Models\Manager\UserManager.cs" />
@@ -344,6 +345,7 @@
     <Content Include="Views\Security\Login.cshtml" />
     <Content Include="Views\Security\Signup.cshtml" />
     <Content Include="Views\Activity\Index.cshtml" />
+    <Content Include="Views\Activity\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -12,5 +12,20 @@ namespace SimulationExam.Web.Models.Manager
         {
             return this.GetDatabase().Activity.ToList();
         }
+
+        public Activity GetActivty(int id)
+        {
+            return this.GetDatabase().Activity.SingleOrDefault(activity => activity.Id == id);
+        }
+
+        public void EditActivty(Activity activity)
+        {
+            ActivityDateManager adv = new ActivityDateManager();
+
+            foreach (ActivityDate activityDate in activity.ActivityDate)
+            {
+                adv.EditActivityDate(activityDate);
+            }
+        }
     }
 }
