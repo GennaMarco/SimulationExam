@@ -7,11 +7,11 @@ namespace SimulationExam.Web.Models.Database
 {
     public abstract class DatabaseSqlServer
     {
-        private SimulationExamEntitiesPCITS Database;
+        private SimulationExamEntities Database;
 
-        protected SimulationExamEntitiesPCITS GetDatabase()
+        protected SimulationExamEntities GetDatabase()
         {
-            Database = new SimulationExamEntitiesPCITS();
+            Database = new SimulationExamEntities();
             return this.Database;
         }
     }

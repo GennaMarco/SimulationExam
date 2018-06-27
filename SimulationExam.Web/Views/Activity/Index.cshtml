@@ -19,11 +19,18 @@
         <tr>
             <td>@activity.Name</td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = activity.Id }, new { @class = "btn btn-primary" })
-             <a href="#" class="btn btn-warning"><i class="glyphicon glyphicon-wrench"></i> Edit</a>
+                @Html.ActionLink("Edit", "Edit", new { id = activity.Id }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Delete", "Delete", new { id = activity.Id }, new { @class = "btn btn-danger", data_role = "delete-link" })
             </td>
         </tr>
-    }        
+    }
+        <tr>
+            <td>
+                @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-success" })
+            </td>
+            <td>
+            </td>
+        </tr>        
     </tbody>
 </table>
 

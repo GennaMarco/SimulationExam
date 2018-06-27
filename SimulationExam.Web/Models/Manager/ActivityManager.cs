@@ -13,18 +13,39 @@ namespace SimulationExam.Web.Models.Manager
             return this.GetDatabase().Activity.ToList();
         }
 
-        public Activity GetActivty(int id)
+        public Activity GetActivityById(int id)
         {
             return this.GetDatabase().Activity.SingleOrDefault(activity => activity.Id == id);
         }
 
-        public void EditActivty(Activity activity)
+        public void InsertActivity(Activity activity)
+        {
+            using (var db = this.GetDatabase())
+            {
+                db.Activity.Add(activity); 
+                db.SaveChanges();  
+            }
+        }
+
+        public void EditActivityById(string name, int id)
+        {
+            using (var db = this.GetDatabase())
+            {
+                Activity activityDB = db.Activity.SingleOrDefault(activity => activity.Id == id);
+                activityDB.Name = name;
+                db.SaveChanges();
+            }
+        }
+
+        public void DeleteActivityById(int id)
         {
             ActivityDateManager adv = new ActivityDateManager();
-
-            foreach (ActivityDate activityDate in activity.ActivityDate)
+            adv.DeleteActivityDatesByActivityId(id);
+            using (var db = this.GetDatabase())
             {
-                adv.EditActivityDate(activityDate);
+                Activity activityDB = db.Activity.SingleOrDefault(activity => activity.Id == id);
+                db.Activity.Remove(activityDB);
+                db.SaveChanges();
             }
         }
     }

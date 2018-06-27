@@ -12,41 +12,41 @@
 namespace SimulationExam.Web.Models
 {
 
-using System;
+    using System;
     using System.Collections.Generic;
     
-public partial class Activity
-{
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Activity()
+    public partial class Activity
     {
 
-        this.ActivityDate = new HashSet<ActivityDate>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Activity()
+        {
 
-        this.UserActivity = new HashSet<UserActivity>();
+            this.ActivityDate = new HashSet<ActivityDate>();
+
+            this.UserActivity = new HashSet<UserActivity>();
+
+        }
+
+
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public Nullable<int> EventId { get; set; }
+
+
+
+        public virtual Event Event { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        public virtual ICollection<ActivityDate> ActivityDate { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        public virtual ICollection<UserActivity> UserActivity { get; set; }
 
     }
-
-
-    public int Id { get; set; }
-
-    public string Name { get; set; }
-
-    public Nullable<int> EventId { get; set; }
-
-
-
-    public virtual Event Event { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<ActivityDate> ActivityDate { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<UserActivity> UserActivity { get; set; }
-
-}
 
 }

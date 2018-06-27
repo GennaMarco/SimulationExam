@@ -14,11 +14,38 @@ namespace SimulationExam.Web.Models.Manager
             return this.GetDatabase().ActivityDate.SingleOrDefault(activityDate => activityDate.Id == id);
         }
 
-        public void EditActivityDate(ActivityDate activityDate)
+        public void EditActivityDateById(DateTime date, int id)
         {
-            // todo: edit activityDate
-            // other changed properties
-            this.GetDatabase().SaveChanges();
+            using (var db = this.GetDatabase())
+            {
+                ActivityDate activityDateDB = db.ActivityDate.SingleOrDefault(activityDate => activityDate.Id == id);   
+                activityDateDB.Date = date;
+                db.SaveChanges();
+            }
+        }
+
+        public void DeleteActivityDatesByActivityId(int id)
+        {
+            string sql = "SELECT * FROM ActivityDate WHERE ActivityId = " + id;
+            using (var db = this.GetDatabase())
+            {
+                List<ActivityDate> activityDates = db.ActivityDate.SqlQuery(sql).ToList();
+                foreach(ActivityDate activityDate in activityDates)
+                {
+                    db.ActivityDate.Remove(activityDate);
+                }
+                db.SaveChanges();
+            }
+        }
+
+        internal void DeleteActivityDateById(int id)
+        {
+            using (var db = this.GetDatabase())
+            {
+                ActivityDate activityDateDB = db.ActivityDate.SingleOrDefault(activityDate => activityDate.Id == id);
+                db.ActivityDate.Remove(activityDateDB);
+                db.SaveChanges();
+            }
         }
     }
 }

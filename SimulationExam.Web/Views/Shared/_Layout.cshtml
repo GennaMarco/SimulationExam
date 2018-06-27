@@ -39,5 +39,39 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var lengthDates = 0;
+
+            $(document).on('click', 'a[data-role="add-activity-date"]', function (e) {
+                lengthDates++;
+
+                var dateNewtr = '<tr><td class="text-center">' +
+                                    '<input class="form-control" name="Activity.ActivityDate[' + lengthDates + '].Date" type="text" data-role="activity-date">' +
+                                '<tr></td>'
+
+                $(this).closest("tr").before(dateNewtr);
+            });
+
+            $(document).on('click', 'button[type="submit"]', function (e) {
+                var inputs = $("input");
+
+                for (var i = 0; i < inputs.length; i++) {
+
+                    if (!inputs[i].value) {
+                        e.preventDefault();
+                        alert("Attenzione! campi vuoti");
+                        break;
+                    }
+                }
+            });
+
+            $(document).on('click', 'a[data-role="delete-link"]', function (e) {
+                return confirm("Sei sicuro di effettuare la cancellazione?");
+            });
+        });
+    </script>
 </body>
 </html>

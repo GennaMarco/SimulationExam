@@ -1,0 +1,42 @@
+﻿@using SimulationExam.Web.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center">Create activity</h2>
+
+@model Activity
+
+<div>
+    <hr />
+    @using (Html.BeginForm("Save", "Activity", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label for="activityName">Name</label>
+            <input class="form-control" name="Activity.Name" type="text">
+        </div>
+        <hr />
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>List of dates</th>
+                </tr>
+            </thead>
+            <tbody id="activity-dates-list">
+                <tr>
+                    <td class="text-center">
+                        <input class="form-control" name="Activity.ActivityDate[0].Date" type="text" data-role="activity-date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" class="btn btn-success" data-role="add-activity-date">Add date</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-success">Save</button>
+    }
+</div>
+
