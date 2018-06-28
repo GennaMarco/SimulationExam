@@ -12,5 +12,10 @@ namespace SimulationExam.Web.Models.Manager
         {
             return this.GetDatabase().User.SingleOrDefault(user => user.Email == email && user.Password == password);
         }
+
+        public ICollection<User> GetUserByRole(string role)
+        {
+            return this.GetDatabase().User.Where(user => user.Role.Name == role).ToList();
+        }
     }
 }
