@@ -28,7 +28,7 @@ namespace SimulationExam.Web.Controllers
             return View(activities);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(Activity activity)
         {
             this.allowedRoles.Add(this.ROLE_MANAGER);
             RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles();
@@ -37,12 +37,19 @@ namespace SimulationExam.Web.Controllers
                 return redirectToHome;
             }
 
-            Activity activity = new Activity();
-
+            if(activity.Name != null && HttpContext.Request.HttpMethod == "POST")
+            {
+                ActivityManager am = new ActivityManager();
+                activity.EventId = this.EVENT_ID;
+                am.InsertActivity(activity);
+                return RedirectToAction("Index");
+            }
+            activity = new Activity();
+            
             return View(activity);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, Activity activity)
         {
             this.allowedRoles.Add(this.ROLE_MANAGER);
             RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles();
@@ -52,54 +59,28 @@ namespace SimulationExam.Web.Controllers
             }
 
             ActivityManager am = new ActivityManager();
-            Activity activity = am.GetActivityById(id);
+            if (activity.Name != null && HttpContext.Request.HttpMethod == "POST")
+            {    
+                am.EditActivityById(activity.Name, activity.Id);
+                ActivityDateManager adv = new ActivityDateManager();
+                foreach (ActivityDate activityDate in activity.ActivityDate)
+                {
+                    if (activityDate.Id > 0)
+                    {
+                        adv.EditActivityDateById((DateTime)activityDate.Date, activityDate.Id);
+                    }
+                    else
+                    {
+                        activityDate.ActivityId = activity.Id;
+                        adv.InsertActivityDate(activityDate);
+                    }
+                }
+                id = activity.Id;
+            }
+
+            activity = am.GetActivityById(id);
 
             return View(activity);
-        }
-
-        public ActionResult Save(Activity activity)
-        {
-            this.allowedRoles.Add(this.ROLE_MANAGER);
-            RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles();
-            if (redirectToHome != null)
-            {
-                return redirectToHome;
-            }
-
-            ActivityManager am = new ActivityManager();
-            activity.EventId = this.EVENT_ID;
-            am.InsertActivity(activity);
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult Update(Activity activity)
-        {
-            this.allowedRoles.Add(this.ROLE_MANAGER);
-            RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles();
-            if (redirectToHome != null)
-            {
-                return redirectToHome;
-            }
-
-            ActivityManager am = new ActivityManager();
-            am.EditActivityById(activity.Name, activity.Id); 
-            ActivityDateManager adv = new ActivityDateManager();
-            foreach (ActivityDate activityDate in activity.ActivityDate)
-            {
-                if(activityDate.Id > 0)
-                {
-                    adv.EditActivityDateById((DateTime)activityDate.Date, activityDate.Id);
-                }
-                else
-                {
-                    activityDate.ActivityId = activity.Id;
-                    adv.InsertActivityDate(activityDate);
-                }
-            }
-
-            return RedirectToAction("Edit", new { id = activity.Id });
         }
 
         public ActionResult Delete(int id)
