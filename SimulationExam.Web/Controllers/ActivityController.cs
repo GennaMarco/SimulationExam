@@ -116,25 +116,5 @@ namespace SimulationExam.Web.Controllers
 
             return RedirectToAction("Index");
         }
-
-        public ActionResult DeleteActivityDate(int id)
-        {
-            this.allowedRoles.Add(this.ROLE_MANAGER);
-            RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles();
-            if (redirectToHome != null)
-            {
-                return redirectToHome;
-            }
-
-            ActivityDateManager adm = new ActivityDateManager();
-            ActivityDate activityDate = adm.GetActivityDateById(id);
-            adm.DeleteActivityDateById(id);
-
-            int activityId = (int)activityDate.ActivityId;
-
-            ActivityManager am = new ActivityManager();
-            Activity activity = am.GetActivityById(activityId);
-            return RedirectToAction("Edit", new { id = activity.Id });
-        }
     }
 }

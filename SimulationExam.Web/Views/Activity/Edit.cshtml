@@ -40,7 +40,7 @@
                             <input type="hidden" class="form-control" name="Activity.ActivityDate[@i].Id" data-role="activity-date-id" value="@activityDate.Id">
                         </td>
                         <td>
-                            @Html.ActionLink("Delete", "DeleteActivityDate", new { id = activityDate.Id }, new { @class = "btn btn-danger", data_role = "delete-link" })
+                            @Html.ActionLink("Delete", "Delete", "ActivityDate", new { id = activityDate.Id }, new { @class = "btn btn-danger", data_role = "delete-link" })
                         </td>
                     </tr>
                 }
