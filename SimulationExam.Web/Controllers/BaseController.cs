@@ -22,10 +22,13 @@ namespace SimulationExam.Web.Controllers
 
         protected RedirectToRouteResult RouteAccessAllowedRoles()
         {
-            if (!this.allowedRoles.Contains(Session["Role"]))  
+            if (this.allowedRoles.Count > 0)
             {
-                TempData["errorMessage"] = "Non hai i permessi per visualizzare questa pagina";
-                return RedirectToAction("Index", "Home", null);
+                if (!this.allowedRoles.Contains(Session["Role"]))
+                {
+                    TempData["errorMessage"] = "Non hai i permessi per visualizzare questa pagina";
+                    return RedirectToAction("Index", "Home", null);
+                }
             }
             return null;
         }

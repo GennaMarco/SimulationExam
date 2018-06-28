@@ -16,8 +16,6 @@ namespace SimulationExam.Web.Controllers
         // GET: Activity
         public ActionResult Index()
         {
-            this.allowedRoles.Add(this.ROLE_MANAGER);
-            this.allowedRoles.Add(this.ROLE_PARTECIPANT);
             RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles();
             if (redirectToHome != null)
             {
@@ -76,7 +74,7 @@ namespace SimulationExam.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(IList<string> listDates, IList<string> listDateIds)
+        public ActionResult Update(Activity activity)
         {
             this.allowedRoles.Add(this.ROLE_MANAGER);
             RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles();
@@ -85,21 +83,23 @@ namespace SimulationExam.Web.Controllers
                 return redirectToHome;
             }
 
-            int activityId = Int32.Parse(Request.Form["activityId"]);
-            string activityName = Request.Form["activityName"];
             ActivityManager am = new ActivityManager();
-            am.EditActivityById(activityName, activityId); 
+            am.EditActivityById(activity.Name, activity.Id); 
             ActivityDateManager adv = new ActivityDateManager();
-            for (int i = 0; i<listDateIds.Count; i++)
+            foreach (ActivityDate activityDate in activity.ActivityDate)
             {
-                string[] date = listDates[i].Split('/');
-                int year = Int32.Parse(date[2]);
-                int month = Int32.Parse(date[1]);
-                int day = Int32.Parse(date[0]);
-                adv.EditActivityDateById(new DateTime(year, month, day), Int32.Parse(listDateIds[i]));
+                if(activityDate.Id > 0)
+                {
+                    adv.EditActivityDateById((DateTime)activityDate.Date, activityDate.Id);
+                }
+                else
+                {
+                    activityDate.ActivityId = activity.Id;
+                    adv.InsertActivityDate(activityDate);
+                }
             }
-       
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Edit", new { id = activity.Id });
         }
 
         public ActionResult Delete(int id)

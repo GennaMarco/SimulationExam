@@ -43,16 +43,25 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            var lengthDates = 0;
+            var lengthDates = $('.activity-dates-list input[data-role="activity-date"]').length - 1;
 
             $(document).on('click', 'a[data-role="add-activity-date"]', function (e) {
+                
                 lengthDates++;
 
-                var dateNewtr = '<tr><td class="text-center">' +
-                                    '<input class="form-control" name="Activity.ActivityDate[' + lengthDates + '].Date" type="text" data-role="activity-date">' +
-                                '<tr></td>'
+                var dateNewtr = '<tr>' +
+                                    '<td class="text-center">' +
+                                        '<input class="form-control" name="Activity.ActivityDate[' + lengthDates + '].Date" type="text" data-role="activity-date">' +
+                                    '</td>' +
+                                '</tr>';
 
                 $(this).closest("tr").before(dateNewtr);
+            });
+
+            $(document).on('click', 'a[data-role="delete-activity-date"]', function (e) {
+                lengthDates--;
+
+                $(this).closest("tr").remove();
             });
 
             $(document).on('click', 'button[type="submit"]', function (e) {

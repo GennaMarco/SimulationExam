@@ -1,7 +1,7 @@
 ﻿@using SimulationExam.Web.Models
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Edit";
 }
 
 <h2 class="text-center">Edit activity</h2>
@@ -13,12 +13,12 @@
     @using (Html.BeginForm("Update", "Activity", FormMethod.Post))
     {
         <div class="form-group">
-            <label for="activityId">Id</label>
-            <input type="text" class="form-control" id="activityId" name="activityId" value="@Model.Id" readonly="readonly">
+            <label>Id</label>
+            <input type="text" class="form-control" name="Activity.Id" value="@Model.Id" readonly="readonly">
         </div>
         <div class="form-group">
-            <label for="activityName">Name</label>
-            <input type="text" class="form-control" id="activityName" name="activityName" value="@Model.Name">
+            <label>Name</label>
+            <input type="text" class="form-control" name="Activity.Name" value="@Model.Name">
         </div>
         <hr />
         <table class="table table-condensed">
@@ -28,28 +28,33 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (ActivityDate activityDate in Model.ActivityDate)
+            <tbody class="activity-dates-list">
+                @for (int i = 0; i < Model.ActivityDate.Count; i++)
                 {
+                    ActivityDate activityDate = Model.ActivityDate.ElementAt(i);
                     string dateValue = String.Format("{0:d/M/yyyy}", activityDate.Date);
+                    
                     <tr>
                         <td class="text-center">
-                            <input type="text" class="form-control" name="listDates" value="@dateValue">
-                            <input type="hidden" class="form-control" name="listDateIds" value="@activityDate.Id">
+                            <input type="text" class="form-control" name="Activity.ActivityDate[@i].Date" data-role="activity-date" value="@dateValue">
+                            <input type="hidden" class="form-control" name="Activity.ActivityDate[@i].Id" data-role="activity-date-id" value="@activityDate.Id">
                         </td>
                         <td>
-                            @Html.ActionLink("Delete", "DeleteActivityDate", new { id = @activityDate.Id }, new { @class = "btn btn-danger", data_role = "delete-link" })
+                            @Html.ActionLink("Delete", "DeleteActivityDate", new { id = activityDate.Id }, new { @class = "btn btn-danger", data_role = "delete-link" })
                         </td>
                     </tr>
                 }
                 <tr>
                     <td>
-                        <a href="#" class="btn btn-success" data-role="add-activity-date">Add date</a>
+                        <a class="btn btn-success" data-role="add-activity-date">Add date</a>
+                    </td>
+                    <td>
+
                     </td>
                 </tr>
             </tbody>
         </table>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-warning">Update</button>
     }
 </div>
 

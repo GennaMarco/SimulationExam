@@ -14,6 +14,15 @@ namespace SimulationExam.Web.Models.Manager
             return this.GetDatabase().ActivityDate.SingleOrDefault(activityDate => activityDate.Id == id);
         }
 
+        public void InsertActivityDate(ActivityDate activityDate)
+        {
+            using (var db = this.GetDatabase())
+            {
+                db.ActivityDate.Add(activityDate);
+                db.SaveChanges();
+            }
+        }
+
         public void EditActivityDateById(DateTime date, int id)
         {
             using (var db = this.GetDatabase())
