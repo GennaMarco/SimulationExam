@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SimulationExamModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SimulationExamModelMyLaptop.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="Id" />
@@ -56,14 +56,14 @@
           <Property Name="Password" Type="varchar" MaxLength="255" />
           <Property Name="RoleId" Type="int" />
         </EntityType>
-        <EntityType Name="UserActivity">
+        <EntityType Name="UserActivityDate">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
-          <Property Name="User_id" Type="int" />
-          <Property Name="ActivityId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ActivityDateId" Type="int" />
           <Property Name="IsPartecipant" Type="tinyint" />
         </EntityType>
         <Association Name="FK_Activity_Event">
@@ -114,38 +114,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserActivity_Activity">
-          <End Role="Activity" Type="Self.Activity" Multiplicity="0..1" />
-          <End Role="UserActivity" Type="Self.UserActivity" Multiplicity="*" />
+        <Association Name="FK_UserActivityDate_ActivityDate">
+          <End Role="ActivityDate" Type="Self.ActivityDate" Multiplicity="0..1" />
+          <End Role="UserActivityDate" Type="Self.UserActivityDate" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Activity">
+            <Principal Role="ActivityDate">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UserActivity">
-              <PropertyRef Name="ActivityId" />
+            <Dependent Role="UserActivityDate">
+              <PropertyRef Name="ActivityDateId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserActivity_User">
+        <Association Name="FK_UserActivityDate_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="UserActivity" Type="Self.UserActivity" Multiplicity="*" />
+          <End Role="UserActivityDate" Type="Self.UserActivityDate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UserActivity">
-              <PropertyRef Name="User_id" />
+            <Dependent Role="UserActivityDate">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SimulationExamModelStoreContainer">
+        <EntityContainer Name="SimulationExamModelMyLaptopStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActivityDate" EntityType="Self.ActivityDate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserActivity" EntityType="Self.UserActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserActivityDate" EntityType="Self.UserActivityDate" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Activity_Event" Association="Self.FK_Activity_Event">
             <End Role="Event" EntitySet="Event" />
             <End Role="Activity" EntitySet="Activity" />
@@ -162,20 +162,20 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserActivity_Activity" Association="Self.FK_UserActivity_Activity">
-            <End Role="Activity" EntitySet="Activity" />
-            <End Role="UserActivity" EntitySet="UserActivity" />
+          <AssociationSet Name="FK_UserActivityDate_ActivityDate" Association="Self.FK_UserActivityDate_ActivityDate">
+            <End Role="ActivityDate" EntitySet="ActivityDate" />
+            <End Role="UserActivityDate" EntitySet="UserActivityDate" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserActivity_User" Association="Self.FK_UserActivity_User">
+          <AssociationSet Name="FK_UserActivityDate_User" Association="Self.FK_UserActivityDate_User">
             <End Role="User" EntitySet="User" />
-            <End Role="UserActivity" EntitySet="UserActivity" />
+            <End Role="UserActivityDate" EntitySet="UserActivityDate" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SimulationExamModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="SimulationExamModelMyLaptop" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="Id" />
@@ -185,7 +185,6 @@
           <Property Name="EventId" Type="Int32" />
           <NavigationProperty Name="Event" Relationship="Self.FK_Activity_Event" FromRole="Activity" ToRole="Event" />
           <NavigationProperty Name="ActivityDate" Relationship="Self.FK_ActivityDate_Activity" FromRole="Activity" ToRole="ActivityDate" />
-          <NavigationProperty Name="UserActivity" Relationship="Self.FK_UserActivity_Activity" FromRole="Activity" ToRole="UserActivity" />
         </EntityType>
         <EntityType Name="ActivityDate">
           <Key>
@@ -195,6 +194,7 @@
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="ActivityId" Type="Int32" />
           <NavigationProperty Name="Activity" Relationship="Self.FK_ActivityDate_Activity" FromRole="ActivityDate" ToRole="Activity" />
+          <NavigationProperty Name="UserActivityDate" Relationship="Self.FK_UserActivityDate_ActivityDate" FromRole="ActivityDate" ToRole="UserActivityDate" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -235,19 +235,19 @@
           <Property Name="RoleId" Type="Int32" />
           <NavigationProperty Name="Event" Relationship="Self.FK_Event_User" FromRole="User" ToRole="Event" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="UserActivity" Relationship="Self.FK_UserActivity_User" FromRole="User" ToRole="UserActivity" />
+          <NavigationProperty Name="UserActivityDate" Relationship="Self.FK_UserActivityDate_User" FromRole="User" ToRole="UserActivityDate" />
         </EntityType>
-        <EntityType Name="UserActivity">
+        <EntityType Name="UserActivityDate">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="User_id" Type="Int32" />
-          <Property Name="ActivityId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ActivityDateId" Type="Int32" />
           <Property Name="IsPartecipant" Type="Byte" />
-          <NavigationProperty Name="Activity" Relationship="Self.FK_UserActivity_Activity" FromRole="UserActivity" ToRole="Activity" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserActivity_User" FromRole="UserActivity" ToRole="User" />
+          <NavigationProperty Name="ActivityDate" Relationship="Self.FK_UserActivityDate_ActivityDate" FromRole="UserActivityDate" ToRole="ActivityDate" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserActivityDate_User" FromRole="UserActivityDate" ToRole="User" />
         </EntityType>
         <Association Name="FK_Activity_Event">
           <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
@@ -273,15 +273,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserActivity_Activity">
-          <End Role="Activity" Type="Self.Activity" Multiplicity="0..1" />
-          <End Role="UserActivity" Type="Self.UserActivity" Multiplicity="*" />
+        <Association Name="FK_UserActivityDate_ActivityDate">
+          <End Role="ActivityDate" Type="Self.ActivityDate" Multiplicity="0..1" />
+          <End Role="UserActivityDate" Type="Self.UserActivityDate" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Activity">
+            <Principal Role="ActivityDate">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UserActivity">
-              <PropertyRef Name="ActivityId" />
+            <Dependent Role="UserActivityDate">
+              <PropertyRef Name="ActivityDateId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -309,26 +309,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserActivity_User">
+        <Association Name="FK_UserActivityDate_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="UserActivity" Type="Self.UserActivity" Multiplicity="*" />
+          <End Role="UserActivityDate" Type="Self.UserActivityDate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UserActivity">
-              <PropertyRef Name="User_id" />
+            <Dependent Role="UserActivityDate">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SimulationExamEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SimulationExamEntitiesMyLaptop" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Activity" EntityType="Self.Activity" />
           <EntitySet Name="ActivityDate" EntityType="Self.ActivityDate" />
           <EntitySet Name="Event" EntityType="Self.Event" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <EntitySet Name="UserActivity" EntityType="Self.UserActivity" />
+          <EntitySet Name="UserActivityDate" EntityType="Self.UserActivityDate" />
           <AssociationSet Name="FK_Activity_Event" Association="Self.FK_Activity_Event">
             <End Role="Event" EntitySet="Event" />
             <End Role="Activity" EntitySet="Activity" />
@@ -337,9 +337,9 @@
             <End Role="Activity" EntitySet="Activity" />
             <End Role="ActivityDate" EntitySet="ActivityDate" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserActivity_Activity" Association="Self.FK_UserActivity_Activity">
-            <End Role="Activity" EntitySet="Activity" />
-            <End Role="UserActivity" EntitySet="UserActivity" />
+          <AssociationSet Name="FK_UserActivityDate_ActivityDate" Association="Self.FK_UserActivityDate_ActivityDate">
+            <End Role="ActivityDate" EntitySet="ActivityDate" />
+            <End Role="UserActivityDate" EntitySet="UserActivityDate" />
           </AssociationSet>
           <AssociationSet Name="FK_Event_User" Association="Self.FK_Event_User">
             <End Role="User" EntitySet="User" />
@@ -349,9 +349,9 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserActivity_User" Association="Self.FK_UserActivity_User">
+          <AssociationSet Name="FK_UserActivityDate_User" Association="Self.FK_UserActivityDate_User">
             <End Role="User" EntitySet="User" />
-            <End Role="UserActivity" EntitySet="UserActivity" />
+            <End Role="UserActivityDate" EntitySet="UserActivityDate" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -359,9 +359,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SimulationExamModelStoreContainer" CdmEntityContainer="SimulationExamEntities">
+        <EntityContainerMapping StorageEntityContainer="SimulationExamModelMyLaptopStoreContainer" CdmEntityContainer="SimulationExamEntitiesMyLaptop">
           <EntitySetMapping Name="Activity">
-            <EntityTypeMapping TypeName="SimulationExamModel.Activity">
+            <EntityTypeMapping TypeName="SimulationExamModelMyLaptop.Activity">
               <MappingFragment StoreEntitySet="Activity">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -370,7 +370,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ActivityDate">
-            <EntityTypeMapping TypeName="SimulationExamModel.ActivityDate">
+            <EntityTypeMapping TypeName="SimulationExamModelMyLaptop.ActivityDate">
               <MappingFragment StoreEntitySet="ActivityDate">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -379,7 +379,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Event">
-            <EntityTypeMapping TypeName="SimulationExamModel.Event">
+            <EntityTypeMapping TypeName="SimulationExamModelMyLaptop.Event">
               <MappingFragment StoreEntitySet="Event">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -388,7 +388,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="SimulationExamModel.Role">
+            <EntityTypeMapping TypeName="SimulationExamModelMyLaptop.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -396,7 +396,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="SimulationExamModel.sysdiagrams">
+            <EntityTypeMapping TypeName="SimulationExamModelMyLaptop.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -407,7 +407,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="SimulationExamModel.User">
+            <EntityTypeMapping TypeName="SimulationExamModelMyLaptop.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -417,13 +417,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserActivity">
-            <EntityTypeMapping TypeName="SimulationExamModel.UserActivity">
-              <MappingFragment StoreEntitySet="UserActivity">
+          <EntitySetMapping Name="UserActivityDate">
+            <EntityTypeMapping TypeName="SimulationExamModelMyLaptop.UserActivityDate">
+              <MappingFragment StoreEntitySet="UserActivityDate">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="User_id" ColumnName="User_id" />
-                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ActivityDateId" ColumnName="ActivityDateId" />
                 <ScalarProperty Name="IsPartecipant" ColumnName="IsPartecipant" />
               </MappingFragment>
             </EntityTypeMapping>

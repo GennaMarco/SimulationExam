@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimulationExam.Web.Models.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,11 +8,11 @@ namespace SimulationExam.Web.Models.Database
 {
     public abstract class DatabaseSqlServer
     {
-        private SimulationExamEntities Database;
+        private SimulationExamEntitiesMyLaptop Database;
 
-        protected SimulationExamEntities GetDatabase()
+        protected SimulationExamEntitiesMyLaptop GetDatabase()
         {
-            Database = new SimulationExamEntities();
+            Database = new SimulationExamEntitiesMyLaptop();
             return this.Database;
         }
     }

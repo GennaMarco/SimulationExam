@@ -1,4 +1,5 @@
 ﻿using SimulationExam.Web.Models.Database;
+using SimulationExam.Web.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

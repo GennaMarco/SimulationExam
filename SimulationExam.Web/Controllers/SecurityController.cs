@@ -1,4 +1,5 @@
 ﻿using SimulationExam.Web.Models;
+using SimulationExam.Web.Models.Entity;
 using SimulationExam.Web.Models.Manager;
 using System;
 using System.Collections.Generic;

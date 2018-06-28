@@ -1,9 +1,10 @@
-﻿using SimulationExam.Web.Models.Database;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using SimulationExam.Web.Models.Database;
+using SimulationExam.Web.Models.Entity;
 
 namespace SimulationExam.Web.Models.Manager
 {

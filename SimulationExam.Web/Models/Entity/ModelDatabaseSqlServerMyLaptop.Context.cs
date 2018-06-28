@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SimulationExam.Web.Models
+namespace SimulationExam.Web.Models.Entity
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SimulationExamEntitiesPCITS : DbContext
+    public partial class SimulationExamEntitiesMyLaptop : DbContext
     {
-        public SimulationExamEntitiesPCITS()
-            : base("name=SimulationExamEntitiesPCITS")
+        public SimulationExamEntitiesMyLaptop()
+            : base("name=SimulationExamEntitiesMyLaptop")
         {
         }
     
@@ -29,7 +29,8 @@ namespace SimulationExam.Web.Models
         public virtual DbSet<ActivityDate> ActivityDate { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<UserActivity> UserActivity { get; set; }
+        public virtual DbSet<UserActivityDate> UserActivityDate { get; set; }
     }
 }
