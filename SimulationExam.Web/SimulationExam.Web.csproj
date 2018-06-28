@@ -245,6 +245,7 @@
     <Compile Include="Models\Manager\ActivityManager.cs" />
     <Compile Include="Models\Manager\RoleManager.cs" />
     <Compile Include="Models\Manager\UserManager.cs" />
+    <Compile Include="Models\Model\UserCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

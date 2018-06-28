@@ -1,12 +1,13 @@
-﻿@using SimulationExam.Web.Models.Entity
+﻿@using SimulationExam.Web.Models.Entity;
+@using SimulationExam.Web.Models.Model;
 
 @{
     ViewBag.Title = "Create";
 }
 
-<h2 class="text-center">Create activity</h2>
+<h2 class="text-center">Create User</h2>
 
-@model User
+@model UserCreate
 
 <div>
     <hr />
@@ -16,24 +17,34 @@
             <label for="userName">Name</label>
             <input class="form-control" id="userName" name="User.Name" type="text">
         </div>
+        <div class="form-group">
+            <label for="userEmail">Email</label>
+            <input class="form-control" id="userEmail" name="User.Email" type="email">
+        </div>
+        <div class="form-group">
+            <label for="userPassword">Password</label>
+            <input class="form-control" id="userPassword" name="User.Password" type="password">
+        </div>
         <hr />
         <table class="table table-condensed">
             <thead>
                 <tr>
-                    <th>List of activities dates invited</th>
+                    <th>Send invite to the user</th>
                 </tr>
             </thead>
-            <tbody class="activity-dates-list">
-                <tr>
-                    <td class="text-center">
-                        <input class="form-control" name="Activity.ActivityDate[0].Date" type="text" data-role="activity-date">
-                    </td>
-                </tr>
-                <tr>
+            <tbody class="user-activity-dates-list">
+            @for (int i = 0;  i < Model.ActivityDates.Count; i++)
+            {
+                ActivityDate activityDate = Model.ActivityDates.ElementAt(i);
+                string dateValue = String.Format("{0:d/M/yyyy}", activityDate.Date);
+                <tr class="user-activity-date-tr">
                     <td>
-                        <a class="btn btn-success" data-role="add-activity-date">Add date</a>
+                        <label>
+                            <input type="checkbox" name="User.UserActivityDate[@i].ActivityDateId" value="@activityDate.Id"/> @activityDate.Activity.Name - @dateValue
+                        </label>
                     </td>
                 </tr>
+            }
             </tbody>
         </table>
         <button type="submit" class="btn btn-success">Save</button>

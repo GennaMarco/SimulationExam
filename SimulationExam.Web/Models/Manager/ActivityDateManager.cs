@@ -10,6 +10,12 @@ namespace SimulationExam.Web.Models.Manager
 {
     public class ActivityDateManager : DatabaseSqlServer
     {
+
+        public ICollection<ActivityDate> GetActivityDates()
+        {
+            return this.GetDatabase().ActivityDate.ToList();
+        }
+
         public ActivityDate GetActivityDateById(int id)
         {
             return this.GetDatabase().ActivityDate.SingleOrDefault(activityDate => activityDate.Id == id);
@@ -48,7 +54,9 @@ namespace SimulationExam.Web.Models.Manager
             }
         }
 
-        internal void DeleteActivityDateById(int id)
+        
+
+        public void DeleteActivityDateById(int id)
         {
             using (var db = this.GetDatabase())
             {

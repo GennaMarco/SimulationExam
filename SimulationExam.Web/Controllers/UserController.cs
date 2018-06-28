@@ -1,6 +1,7 @@
 ﻿using SimulationExam.Web.Models;
 using SimulationExam.Web.Models.Entity;
 using SimulationExam.Web.Models.Manager;
+using SimulationExam.Web.Models.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,31 @@ namespace SimulationExam.Web.Controllers
             ICollection<User> partecipants = us.GetUserByRole(this.ROLE_PARTECIPANT);
 
             return View(partecipants);
+        }
+
+        public ActionResult Create(User user)
+        {
+            this.allowedRoles.Add(this.ROLE_MANAGER);
+            RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles();
+            if (redirectToHome != null)
+            {
+                return redirectToHome;
+            }
+
+            if (user.Name != null && HttpContext.Request.HttpMethod == "POST")
+            {
+                RoleManager rm = new RoleManager();
+                user.RoleId = rm.GetRoleByName(this.ROLE_PARTECIPANT).Id;
+                UserManager um = new UserManager();
+                um.InsertUser(user);
+                return RedirectToAction("Index");
+            }
+            ActivityDateManager adv = new ActivityDateManager();
+            UserCreate us = new UserCreate();
+            us.User = new User();
+            us.ActivityDates = adv.GetActivityDates();
+
+            return View(us);
         }
     }
 }

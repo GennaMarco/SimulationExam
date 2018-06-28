@@ -18,5 +18,14 @@ namespace SimulationExam.Web.Models.Manager
         {
             return this.GetDatabase().User.Where(user => user.Role.Name == role).ToList();
         }
+
+        public void InsertUser(User user)
+        {
+            using (var db = this.GetDatabase())
+            {
+                db.User.Add(user);
+                db.SaveChanges();
+            }
+        }
     }
 }
