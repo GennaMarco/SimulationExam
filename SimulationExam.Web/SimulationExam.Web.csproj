@@ -244,8 +244,9 @@
     <Compile Include="Models\Manager\ActivityDateManager.cs" />
     <Compile Include="Models\Manager\ActivityManager.cs" />
     <Compile Include="Models\Manager\RoleManager.cs" />
+    <Compile Include="Models\Manager\UserActivityDateManager.cs" />
     <Compile Include="Models\Manager\UserManager.cs" />
-    <Compile Include="Models\Model\UserCreate.cs" />
+    <Compile Include="Models\Model\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -320,6 +321,7 @@
     <Content Include="Views\Activity\Create.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\ActivityDate\" />

@@ -1,0 +1,62 @@
+﻿@using SimulationExam.Web.Models.Entity
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="text-center">Edit user</h2>
+
+@model User
+
+<div>
+    <hr />
+    @using (Html.BeginForm("Edit", "User", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label>Id</label>
+            <input type="text" class="form-control" name="User.Id" value="@Model.Id" readonly="readonly">
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="User.Name" value="@Model.Name">
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="User.Email" value="@Model.Email">
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="User.Password" value="@Model.Password">
+        </div>
+        <hr />
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>List of activity dates</th>
+                </tr>
+            </thead>
+            <tbody class="activity-dates-list">
+                @for (int i = 0; i < Model.UserActivityDate.Count; i++)
+                {
+                    ActivityDate activityDate = Model.UserActivityDate.ElementAt(i).ActivityDate;
+                    UserActivityDate userActivityDate = Model.UserActivityDate.ElementAt(i);
+                    string dateValue = String.Format("{0:d/M/yyyy}", activityDate.Date);
+                    string isChecked = userActivityDate.IsPartecipant == 1 ? "checked" : "";
+
+                    <tr>
+                        <td>
+                            <label>
+                                <input type="hidden" name="User.UserActivityDate[@i].Id" value="@userActivityDate.Id">
+                                <input type="hidden" name="User.UserActivityDate[@i].ActivityDateId" value="@activityDate.Id">
+                                <input type="checkbox" name="User.UserActivityDate[@i].IsPartecipant" value="1" @isChecked /> @activityDate.Activity.Name - @dateValue
+                            </label>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-warning">Update</button>
+    }
+</div>
+
+

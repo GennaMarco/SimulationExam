@@ -12,6 +12,7 @@
     <thead>
     <th>Name</th>
     <th>Email</th>
+    <th>Password</th>
     <th>Actions</th>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
             <tr>
                 <td>@user.Name</td>
                 <td>@user.Email</td>
+                <td>@user.Password</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = user.Id }, new { @class = "btn btn-warning" })
                     @Html.ActionLink("Delete", "Delete", new { id = user.Id }, new { @class = "btn btn-danger", data_role = "delete-link" })
@@ -30,6 +32,7 @@
             <td>
                 @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-success" })
             </td>
+            <td></td>
             <td></td>
             <td></td>
         </tr>

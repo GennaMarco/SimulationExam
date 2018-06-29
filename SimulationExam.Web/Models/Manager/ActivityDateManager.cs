@@ -10,7 +10,6 @@ namespace SimulationExam.Web.Models.Manager
 {
     public class ActivityDateManager : DatabaseSqlServer
     {
-
         public ICollection<ActivityDate> GetActivityDates()
         {
             return this.GetDatabase().ActivityDate.ToList();
@@ -53,8 +52,6 @@ namespace SimulationExam.Web.Models.Manager
                 db.SaveChanges();
             }
         }
-
-        
 
         public void DeleteActivityDateById(int id)
         {

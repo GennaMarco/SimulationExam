@@ -7,7 +7,7 @@ using System.Web;
 
 namespace SimulationExam.Web.Models.Model
 {
-    public class UserCreate
+    public class UserVM
     {
         public User User {get; set;}
         public ICollection<ActivityDate> ActivityDates {get; set;}

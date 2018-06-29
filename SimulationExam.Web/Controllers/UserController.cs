@@ -45,11 +45,32 @@ namespace SimulationExam.Web.Controllers
                 return RedirectToAction("Index");
             }
             ActivityDateManager adv = new ActivityDateManager();
-            UserCreate us = new UserCreate();
+            UserVM us = new UserVM();
             us.User = new User();
             us.ActivityDates = adv.GetActivityDates();
 
             return View(us);
+        }
+
+        public ActionResult Edit(int id, User user)
+        {
+            this.allowedRoles.Add(this.ROLE_MANAGER);
+            RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles();
+            if (redirectToHome != null)
+            {
+                return redirectToHome;
+            }
+
+            UserManager am = new UserManager();
+            if (user.Name != null && HttpContext.Request.HttpMethod == "POST")
+            {
+                am.EditUser(user);
+                id = user.Id;
+            }
+
+            user = am.GetUserById(id);
+
+            return View(user);
         }
     }
 }

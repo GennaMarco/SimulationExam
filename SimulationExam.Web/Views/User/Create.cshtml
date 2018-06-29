@@ -7,7 +7,7 @@
 
 <h2 class="text-center">Create User</h2>
 
-@model UserCreate
+@model UserVM
 
 <div>
     <hr />
@@ -40,7 +40,8 @@
                 <tr class="user-activity-date-tr">
                     <td>
                         <label>
-                            <input type="checkbox" name="User.UserActivityDate[@i].ActivityDateId" value="@activityDate.Id"/> @activityDate.Activity.Name - @dateValue
+                            <input type="hidden" name="User.UserActivityDate[@i].ActivityDateId" value="@activityDate.Id">
+                            <input type="checkbox" name="User.UserActivityDate[@i].IsPartecipant" value="1"/> @activityDate.Activity.Name - @dateValue
                         </label>
                     </td>
                 </tr>
