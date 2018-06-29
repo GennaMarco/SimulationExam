@@ -49,5 +49,17 @@ namespace SimulationExam.Web.Models.Manager
                 db.SaveChanges();
             }
         }
+
+        public void DeleteUserById(int id)
+        {
+            UserActivityDateManager uadm = new UserActivityDateManager();
+            uadm.DeleteUserActivityDatesByUserId(id);
+            using (var db = this.GetDatabase())
+            {
+                User user = db.User.SingleOrDefault(usr => usr.Id == id);
+                db.User.Remove(user);
+                db.SaveChanges();
+            }
+        }
     }
 }

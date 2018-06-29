@@ -15,6 +15,7 @@ namespace SimulationExam.Web.Controllers
         // GET: User
         public ActionResult Index()
         {
+            this.allowedRoles.Add(this.ROLE_MANAGER);
             RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles();
             if (redirectToHome != null)
             {
@@ -71,6 +72,21 @@ namespace SimulationExam.Web.Controllers
             user = am.GetUserById(id);
 
             return View(user);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            this.allowedRoles.Add(this.ROLE_MANAGER);
+            RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles();
+            if (redirectToHome != null)
+            {
+                return redirectToHome;
+            }
+
+            UserManager am = new UserManager();
+            am.DeleteUserById(id);
+
+            return RedirectToAction("Index");
         }
     }
 }

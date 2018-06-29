@@ -41,14 +41,9 @@ namespace SimulationExam.Web.Models.Manager
 
         public void DeleteActivityDatesByActivityId(int id)
         {
-            string sql = "SELECT * FROM ActivityDate WHERE ActivityId = " + id;
             using (var db = this.GetDatabase())
             {
-                List<ActivityDate> activityDates = db.ActivityDate.SqlQuery(sql).ToList();
-                foreach(ActivityDate activityDate in activityDates)
-                {
-                    db.ActivityDate.Remove(activityDate);
-                }
+                db.ActivityDate.RemoveRange(db.ActivityDate.Where(activityDate => activityDate.ActivityId == id));
                 db.SaveChanges();
             }
         }
