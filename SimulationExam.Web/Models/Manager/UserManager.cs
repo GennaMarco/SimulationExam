@@ -42,9 +42,17 @@ namespace SimulationExam.Web.Models.Manager
                 userDB.Email = user.Email;
                 userDB.Password = user.Password;
                 UserActivityDateManager uadm = new UserActivityDateManager();
-                foreach(UserActivityDate userActivityDateDB in user.UserActivityDate)
+                foreach(UserActivityDate userActivityDate in user.UserActivityDate)
                 {
-                    uadm.EditUserActivityDate(userActivityDateDB);
+                    if(userActivityDate.Id > 0)
+                    {
+                        uadm.EditUserActivityDate(userActivityDate);
+                    }
+                    else
+                    {
+                        userActivityDate.UserId = user.Id;
+                        uadm.InsertUserActivityDate(userActivityDate);
+                    }
                 }
                 db.SaveChanges();
             }

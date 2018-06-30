@@ -12,4 +12,3 @@ C:\Users\Marco\Desktop\GITHUB\SimulationExam\SimulationExam.Classes\obj\Debug\Si
 \\studenti.local\Share\UserFolder\m.degennaro\Desktop\SimulationExam-master\SimulationExam.Classes\obj\Debug\SimulationExam.Classes.csprojResolveAssemblyReference.cache
 \\studenti.local\Share\UserFolder\m.degennaro\Desktop\SimulationExam-master\SimulationExam.Classes\obj\Debug\SimulationExam.Classes.dll
 \\studenti.local\Share\UserFolder\m.degennaro\Desktop\SimulationExam-master\SimulationExam.Classes\obj\Debug\SimulationExam.Classes.pdb
-C:\Users\Marco\Desktop\GITHUB\SimulationExam\SimulationExam.Classes\obj\Debug\SimulationExam.Classes.csprojResolveAssemblyReference.cache

@@ -1,4 +1,5 @@
-﻿@using SimulationExam.Web.Models.Entity
+﻿@using SimulationExam.Web.Models.Model
+@using SimulationExam.Web.Models.Entity
 
 @{
     ViewBag.Title = "Edit";
@@ -6,7 +7,7 @@
 
 <h2 class="text-center">Edit user</h2>
 
-@model User
+@model UserVM
 
 <div>
     <hr />
@@ -14,19 +15,19 @@
     {
         <div class="form-group">
             <label>Id</label>
-            <input type="text" class="form-control" name="User.Id" value="@Model.Id" readonly="readonly">
+            <input type="text" class="form-control" name="User.Id" value="@Model.User.Id" readonly="readonly">
         </div>
         <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" name="User.Name" value="@Model.Name">
+            <input type="text" class="form-control" name="User.Name" value="@Model.User.Name">
         </div>
         <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" name="User.Email" value="@Model.Email">
+            <input type="text" class="form-control" name="User.Email" value="@Model.User.Email">
         </div>
         <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" name="User.Password" value="@Model.Password">
+            <input type="text" class="form-control" name="User.Password" value="@Model.User.Password">
         </div>
         <hr />
         <table class="table table-condensed">
@@ -36,13 +37,12 @@
                 </tr>
             </thead>
             <tbody class="activity-dates-list">
-                @for (int i = 0; i < Model.UserActivityDate.Count; i++)
+                @for (int i = 0; i < Model.ActivityDates.Count; i++)
                 {
-                    ActivityDate activityDate = Model.UserActivityDate.ElementAt(i).ActivityDate;
-                    UserActivityDate userActivityDate = Model.UserActivityDate.ElementAt(i);
+                    ActivityDate activityDate = Model.ActivityDates.ElementAt(i);
+                    UserActivityDate userActivityDate = Model.GetUserActivityDateByUserAndActivityDate(activityDate);
                     string dateValue = String.Format("{0:d/M/yyyy}", activityDate.Date);
                     string isChecked = userActivityDate.IsPartecipant == 1 ? "checked" : "";
-
                     <tr>
                         <td>
                             <label>

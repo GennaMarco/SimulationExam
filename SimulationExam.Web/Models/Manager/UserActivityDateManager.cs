@@ -9,11 +9,20 @@ namespace SimulationExam.Web.Models.Manager
 {
     public class UserActivityDateManager : DatabaseSqlServer
     {
+        public void InsertUserActivityDate(UserActivityDate userActivityDate)
+        {
+            using (var db = this.GetDatabase())
+            {
+                db.UserActivityDate.Add(userActivityDate);
+                db.SaveChanges();
+            }
+        }
+
         public void EditUserActivityDate(UserActivityDate userActivityDate)
         {
             using (var db = this.GetDatabase())
             {
-                UserActivityDate userActivityDateDB = db.UserActivityDate.SingleOrDefault(activity => activity.Id == userActivityDate.Id);
+                UserActivityDate userActivityDateDB = db.UserActivityDate.SingleOrDefault(usrActivityDateDB => usrActivityDateDB.Id == userActivityDate.Id);
                 userActivityDateDB.IsPartecipant = userActivityDate.IsPartecipant;
                 db.SaveChanges();
             }

@@ -46,11 +46,11 @@ namespace SimulationExam.Web.Controllers
                 return RedirectToAction("Index");
             }
             ActivityDateManager adv = new ActivityDateManager();
-            UserVM us = new UserVM();
-            us.User = new User();
-            us.ActivityDates = adv.GetActivityDates();
+            UserVM userVM = new UserVM();
+            userVM.User = new User();
+            userVM.ActivityDates = adv.GetActivityDates();
 
-            return View(us);
+            return View(userVM);
         }
 
         public ActionResult Edit(int id, User user)
@@ -62,16 +62,20 @@ namespace SimulationExam.Web.Controllers
                 return redirectToHome;
             }
 
-            UserManager am = new UserManager();
+            UserManager um = new UserManager();
             if (user.Name != null && HttpContext.Request.HttpMethod == "POST")
             {
-                am.EditUser(user);
+                um.EditUser(user);
                 id = user.Id;
             }
+            UserVM userVM = new UserVM();
+            ActivityDateManager adm = new ActivityDateManager();
 
-            user = am.GetUserById(id);
+            userVM.User = um.GetUserById(id);
+            userVM.ActivityDates = adm.GetActivityDates();
+            //user = am.GetUserById(id);
 
-            return View(user);
+            return View(userVM);
         }
 
         public ActionResult Delete(int id)
