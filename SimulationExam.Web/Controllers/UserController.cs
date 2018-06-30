@@ -4,6 +4,7 @@ using SimulationExam.Web.Models.Manager;
 using SimulationExam.Web.Models.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -42,8 +43,15 @@ namespace SimulationExam.Web.Controllers
                 RoleManager rm = new RoleManager();
                 user.RoleId = rm.GetRoleByName(this.ROLE_PARTECIPANT).Id;
                 UserManager um = new UserManager();
-                um.InsertUser(user);
-                return RedirectToAction("Index");
+                try
+                {
+                    um.InsertUser(user);
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateException)
+                {
+                    TempData["errorMessage"] = "L'email inserita non è valida perchè già esistente";
+                }
             }
             ActivityDateManager adv = new ActivityDateManager();
             UserVM userVM = new UserVM();
@@ -65,15 +73,21 @@ namespace SimulationExam.Web.Controllers
             UserManager um = new UserManager();
             if (user.Name != null && HttpContext.Request.HttpMethod == "POST")
             {
-                um.EditUser(user);
-                id = user.Id;
+                try
+                {
+                    um.EditUser(user);
+                    id = user.Id;
+                }
+                catch (DbUpdateException)
+                {
+                    TempData["errorMessage"] = "L'email inserita non è valida perchè già esistente";
+                }
             }
             UserVM userVM = new UserVM();
             ActivityDateManager adm = new ActivityDateManager();
 
             userVM.User = um.GetUserById(id);
             userVM.ActivityDates = adm.GetActivityDates();
-            //user = am.GetUserById(id);
 
             return View(userVM);
         }

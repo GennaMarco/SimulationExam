@@ -5,6 +5,17 @@
     ViewBag.Title = "Create";
 }
 
+@if (TempData["errorMessage"] != null)
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-danger text-center">
+                <strong>Attenzione!</strong> @TempData["errorMessage"];
+            </div>
+        </div>
+    </div>
+}
+
 <h2 class="text-center">Create User</h2>
 
 @model UserVM
