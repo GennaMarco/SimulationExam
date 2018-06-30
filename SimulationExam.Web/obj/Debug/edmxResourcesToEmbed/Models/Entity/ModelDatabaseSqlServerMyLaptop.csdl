@@ -54,8 +54,8 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="RoleId" Type="Int32" />
     <NavigationProperty Name="Event" Relationship="Self.FK_Event_User" FromRole="User" ToRole="Event" />
     <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
@@ -72,6 +72,7 @@
     <Property Name="IsPartecipant" Type="Byte" />
     <NavigationProperty Name="ActivityDate" Relationship="Self.FK_UserActivityDate_ActivityDate" FromRole="UserActivityDate" ToRole="ActivityDate" />
     <NavigationProperty Name="User" Relationship="Self.FK_UserActivityDate_User" FromRole="UserActivityDate" ToRole="User" />
+    <Property Name="WillCome" Type="Byte" />
   </EntityType>
   <Association Name="FK_Activity_Event">
     <End Role="Event" Type="Self.Event" Multiplicity="0..1" />

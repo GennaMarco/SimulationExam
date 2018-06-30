@@ -47,8 +47,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" />
-    <Property Name="Email" Type="varchar" MaxLength="255" />
-    <Property Name="Password" Type="varchar" MaxLength="255" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="RoleId" Type="int" />
   </EntityType>
   <EntityType Name="UserActivityDate">
@@ -60,6 +60,7 @@
     <Property Name="UserId" Type="int" />
     <Property Name="ActivityDateId" Type="int" />
     <Property Name="IsPartecipant" Type="tinyint" />
+    <Property Name="WillCome" Type="tinyint" />
   </EntityType>
   <Association Name="FK_Activity_Event">
     <End Role="Event" Type="Self.Event" Multiplicity="0..1" />

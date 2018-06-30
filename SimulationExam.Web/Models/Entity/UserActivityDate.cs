@@ -19,6 +19,7 @@ namespace SimulationExam.Web.Models.Entity
         public Nullable<int> UserId { get; set; }
         public Nullable<int> ActivityDateId { get; set; }
         public Nullable<byte> IsPartecipant { get; set; }
+        public Nullable<byte> WillCome { get; set; }
     
         public virtual ActivityDate ActivityDate { get; set; }
         public virtual User User { get; set; }

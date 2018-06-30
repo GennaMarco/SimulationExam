@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SimulationExamModelMyLaptop.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SimulationExamModelMyLaptop.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="Id" />
@@ -52,8 +52,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
-          <Property Name="Email" Type="varchar" MaxLength="255" />
-          <Property Name="Password" Type="varchar" MaxLength="255" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="RoleId" Type="int" />
         </EntityType>
         <EntityType Name="UserActivityDate">
@@ -65,6 +65,7 @@
           <Property Name="UserId" Type="int" />
           <Property Name="ActivityDateId" Type="int" />
           <Property Name="IsPartecipant" Type="tinyint" />
+          <Property Name="WillCome" Type="tinyint" />
         </EntityType>
         <Association Name="FK_Activity_Event">
           <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
@@ -171,8 +172,7 @@
             <End Role="UserActivityDate" EntitySet="UserActivityDate" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SimulationExamModelMyLaptop" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -230,8 +230,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RoleId" Type="Int32" />
           <NavigationProperty Name="Event" Relationship="Self.FK_Event_User" FromRole="User" ToRole="Event" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
@@ -248,6 +248,7 @@
           <Property Name="IsPartecipant" Type="Byte" />
           <NavigationProperty Name="ActivityDate" Relationship="Self.FK_UserActivityDate_ActivityDate" FromRole="UserActivityDate" ToRole="ActivityDate" />
           <NavigationProperty Name="User" Relationship="Self.FK_UserActivityDate_User" FromRole="UserActivityDate" ToRole="User" />
+          <Property Name="WillCome" Type="Byte" />
         </EntityType>
         <Association Name="FK_Activity_Event">
           <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
@@ -420,6 +421,7 @@
           <EntitySetMapping Name="UserActivityDate">
             <EntityTypeMapping TypeName="SimulationExamModelMyLaptop.UserActivityDate">
               <MappingFragment StoreEntitySet="UserActivityDate">
+                <ScalarProperty Name="WillCome" ColumnName="WillCome" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />

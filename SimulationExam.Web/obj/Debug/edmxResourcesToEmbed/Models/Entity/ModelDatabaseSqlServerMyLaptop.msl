@@ -61,6 +61,7 @@
     <EntitySetMapping Name="UserActivityDate">
       <EntityTypeMapping TypeName="SimulationExamModelMyLaptop.UserActivityDate">
         <MappingFragment StoreEntitySet="UserActivityDate">
+          <ScalarProperty Name="WillCome" ColumnName="WillCome" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
