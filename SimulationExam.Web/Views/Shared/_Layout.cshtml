@@ -40,11 +40,13 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/bootstrap-datepicker.js")
     @RenderSection("scripts", required: false)
 
     <!-- START ADD ACTIVITY DATES -->
     <script type="text/javascript">
         $(document).ready(function () {
+            initDatePicker();
 
             var lengthDates = $('.activity-dates-list input[data-role="activity-date"]').length - 1;
 
@@ -54,11 +56,12 @@
 
                 var dateNewtr = '<tr>' +
                                     '<td class="text-center">' +
-                                        '<input class="form-control" name="Activity.ActivityDate[' + lengthDates + '].Date" type="text" data-role="activity-date">' +
+                                        '<input class="form-control" name="Activity.ActivityDate[' + lengthDates + '].Date" type="text" data-role="activity-date" data-input-type="date">' +
                                     '</td>' +
                                 '</tr>';
 
                 $(this).closest("tr").before(dateNewtr);
+                initDatePicker();
             });
 
             $(document).on('click', 'a[data-role="delete-activity-date"]', function (e) {
@@ -83,6 +86,18 @@
             $(document).on('click', 'a[data-role="delete-link"]', function (e) {
                 return confirm("Sei sicuro di effettuare la cancellazione?");
             });
+
+            // BOOTSRAP DATE-PICKER
+            function initDatePicker(){
+                $('input[data-input-type="date"]').datepicker({
+                    format: "dd/mm/yyyy",
+                    todayBtn: true,
+                    language: "it",
+                    autoclose: true,
+                    orientation: "bottom auto",
+                    todayHighlight: true
+                });
+            }
         });
     </script>
     <!-- END ADD ACTIVITY DATES -->

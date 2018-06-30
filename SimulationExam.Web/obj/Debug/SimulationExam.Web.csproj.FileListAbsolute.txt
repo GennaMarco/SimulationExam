@@ -403,3 +403,4 @@ C:\SimulationExam\SimulationExam.Web\obj\Debug\SimulationExam.Web.pdb
 \\studenti.local\Share\UserFolder\m.degennaro\Desktop\SimulationExam-master\SimulationExam.Web\obj\Debug\SimulationExam.Web.dll
 \\studenti.local\Share\UserFolder\m.degennaro\Desktop\SimulationExam-master\SimulationExam.Web\obj\Debug\SimulationExam.Web.pdb
 \\studenti.local\Share\UserFolder\m.degennaro\Desktop\SimulationExam-master\SimulationExam.Web\obj\Debug\SimulationExam.Web.csprojResolveAssemblyReference.cache
+C:\Users\Marco\Desktop\GITHUB\SimulationExam\SimulationExam.Web\obj\Debug\SimulationExam.Web.csprojResolveAssemblyReference.cache
