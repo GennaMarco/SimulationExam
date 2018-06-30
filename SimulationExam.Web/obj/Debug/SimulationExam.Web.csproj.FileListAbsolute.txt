@@ -95,7 +95,6 @@ C:\Users\Marco\Desktop\GITHUB\SimulationExam\SimulationExam.Web\bin\it\Microsoft
 C:\Users\Marco\Desktop\GITHUB\SimulationExam\SimulationExam.Web\bin\it\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\Marco\Desktop\GITHUB\SimulationExam\SimulationExam.Web\bin\it\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\Marco\Desktop\GITHUB\SimulationExam\SimulationExam.Web\bin\it\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Users\Marco\Desktop\GITHUB\SimulationExam\SimulationExam.Web\obj\Debug\SimulationExam.Web.csprojResolveAssemblyReference.cache
 C:\Users\Marco\Desktop\GITHUB\SimulationExam\SimulationExam.Web\obj\Debug\SimulationExam.Web.dll
 C:\Users\Marco\Desktop\GITHUB\SimulationExam\SimulationExam.Web\obj\Debug\SimulationExam.Web.pdb
 \\studenti.local\Share\UserFolder\m.degennaro\Desktop\SimulationExam\SimulationExam.Web\obj\Debug\SimulationExam.Web.csprojResolveAssemblyReference.cache

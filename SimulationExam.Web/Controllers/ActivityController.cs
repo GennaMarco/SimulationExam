@@ -17,6 +17,8 @@ namespace SimulationExam.Web.Controllers
         // GET: Activity
         public ActionResult Index()
         {
+            this.allowedRoles.Add(this.ROLE_MANAGER);
+            this.allowedRoles.Add(this.ROLE_PARTECIPANT);
             RedirectToRouteResult redirectToHome = this.RouteAccessAllowedRoles();
             if (redirectToHome != null)
             {

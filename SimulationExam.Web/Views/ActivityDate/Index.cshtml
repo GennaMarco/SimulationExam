@@ -1,0 +1,39 @@
+﻿@using SimulationExam.Web.Models.Model
+@using SimulationExam.Web.Models.Entity
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center">Activity dates</h2>
+
+@model ActivityDateVM
+
+<div>
+    <hr />
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>List of activity dates</th>
+                <th>Customers invited</th>
+            </tr>
+        </thead>
+        <tbody class="activity-dates-list">
+            @for (int i = 0; i < Model.activityDates.Count; i++)
+            {
+                ActivityDate activityDate = Model.activityDates.ElementAt(i);
+                string dateValue = String.Format("{0:d/M/yyyy}", activityDate.Date);
+                <tr>
+                    <td>
+                        @activityDate.Activity.Name - @dateValue
+                    </td>
+                    <td>
+                        @activityDate.UserActivityDate.Where(userActivityDate => userActivityDate.IsPartecipant == 1).ToList().Count
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

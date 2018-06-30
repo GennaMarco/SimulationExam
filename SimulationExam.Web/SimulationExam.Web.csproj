@@ -246,6 +246,7 @@
     <Compile Include="Models\Manager\RoleManager.cs" />
     <Compile Include="Models\Manager\UserActivityDateManager.cs" />
     <Compile Include="Models\Manager\UserManager.cs" />
+    <Compile Include="Models\Model\ActivityDateVM.cs" />
     <Compile Include="Models\Model\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -322,10 +323,9 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\ActivityDate\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\ActivityDate\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

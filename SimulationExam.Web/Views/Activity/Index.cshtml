@@ -10,14 +10,25 @@
 
 <table class="table table-hover">
     <thead>
-        <th>Name</th>
-        <th>Actions</th>
+        <tr>
+            <th>Name</th>
+            <th>Customers invited</th>
+            <th>Actions</th>
+        </tr>
     </thead>
     <tbody>
     @foreach (Activity activity in Model)
     {
+        ICollection<ActivityDate> activityDates = activity.ActivityDate.Where(activityDate => activityDate.ActivityId == activity.Id).ToList();
+        
+        int sum = 0;
+        foreach(ActivityDate activityDate in activityDates)
+        {
+            sum += activityDate.UserActivityDate.Where(userActivityDate => userActivityDate.IsPartecipant == 1).ToList().Count;
+        }
         <tr>
             <td>@activity.Name</td>
+            <td>@activityDates.Sum(activityDate => activityDate.UserActivityDate.Where(userActivityDate => userActivityDate.IsPartecipant == 1).ToList().Count)</td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = activity.Id }, new { @class = "btn btn-warning" })
                 @Html.ActionLink("Delete", "Delete", new { id = activity.Id }, new { @class = "btn btn-danger", data_role = "delete-link" })
@@ -27,6 +38,8 @@
         <tr>
             <td>
                 @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-success" })
+            </td>
+            <td>
             </td>
             <td>
             </td>

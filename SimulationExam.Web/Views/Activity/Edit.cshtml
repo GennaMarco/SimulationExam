@@ -25,6 +25,7 @@
             <thead>
                 <tr>
                     <th>List of dates</th>
+                    <th>Customers invited</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -38,6 +39,9 @@
                         <td class="text-center">
                             <input type="text" class="form-control" name="Activity.ActivityDate[@i].Date" data-role="activity-date" value="@dateValue">
                             <input type="hidden" class="form-control" name="Activity.ActivityDate[@i].Id" data-role="activity-date-id" value="@activityDate.Id">
+                        </td>
+                        <td>
+                            @activityDate.UserActivityDate.Where(userActivityDate => userActivityDate.IsPartecipant == 1).ToList().Count
                         </td>
                         <td>
                             @Html.ActionLink("Delete", "Delete", "ActivityDate", new { id = activityDate.Id }, new { @class = "btn btn-danger", data_role = "delete-link" })
